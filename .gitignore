@@ -1,0 +1,13 @@
+*.tfstate
+*.tfstate.*
+.terraform/
+.terraform.lock.hcl
+*.tfvars
+!*.tfvars.example
+*.pem
+*.key
+.env
+.DS_Store
+.idea/
+.vscode/
+.kiro/

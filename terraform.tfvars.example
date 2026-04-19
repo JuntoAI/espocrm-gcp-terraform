@@ -1,0 +1,62 @@
+# =============================================================================
+# EspoCRM GCP Deployment — Terraform Variables
+# =============================================================================
+# Copy this file to terraform.tfvars and fill in your values:
+#   cp terraform.tfvars.example terraform.tfvars
+#
+# NEVER commit terraform.tfvars to version control — it may contain secrets.
+# =============================================================================
+
+# --- GCP Project & Region ---------------------------------------------------
+
+# GCP project ID where all resources will be created
+project_id = "your-project-id"
+
+# GCP region for regional resources (Cloud SQL, subnet, static IP)
+region = "us-central1"
+
+# GCE instance zone (must be within the region above)
+zone = "us-central1-a"
+
+# --- Networking --------------------------------------------------------------
+
+# Domain name for TLS certificate (Caddy/Let's Encrypt) and EspoCRM site URL.
+# You must create a DNS A record pointing this domain to the static IP output
+# after deployment.
+domain = "crm.example.com"
+
+# CIDR ranges allowed to SSH into the GCE instance.
+# Restrict this to your team's IP ranges in production.
+ssh_source_ranges = ["0.0.0.0/0"]
+
+# --- Cloud SQL ---------------------------------------------------------------
+
+# Cloud SQL machine tier. db-f1-micro is sufficient for ≤5 users.
+# See: https://cloud.google.com/sql/docs/mysql/instance-settings
+db_tier = "db-f1-micro"
+
+# Daily backup window start time in UTC (HH:MM format)
+db_backup_start_time = "03:00"
+
+# Enable deletion protection on the Cloud SQL instance.
+# Set to false only for development/testing environments.
+deletion_protection = true
+
+# --- Google Workspace OIDC Authentication ------------------------------------
+# These values come from the OAuth 2.0 client you create manually in the
+# GCP Console. Leave empty for initial deployment; add after OAuth setup.
+# See README.md for step-by-step OAuth client creation instructions.
+
+# OAuth 2.0 client ID (from GCP Console > APIs & Services > Credentials)
+oauth_client_id = ""
+
+# OAuth 2.0 client secret — SENSITIVE, do not commit the real value!
+# (from GCP Console > APIs & Services > Credentials)
+oauth_client_secret = ""
+
+# --- Terraform State ---------------------------------------------------------
+
+# GCS bucket for Terraform remote state. Must exist before running
+# terraform init. Create it manually or via a bootstrap script:
+#   gsutil mb -p your-project-id -l us-central1 gs://your-tf-state-bucket
+terraform_state_bucket = "your-tf-state-bucket"
