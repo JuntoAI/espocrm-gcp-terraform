@@ -1,6 +1,8 @@
 # EspoCRM on GCP — Terraform Deployment
 
-Terraform-managed infrastructure deploying [EspoCRM](https://www.espocrm.com/) on Google Cloud Platform . Provisions a single GCE instance running Docker Compose (EspoCRM app, daemon, websocket, Caddy reverse proxy) backed by Cloud SQL for MySQL 8.0, with Google Workspace OIDC authentication for `@example.com` accounts.
+Terraform-managed infrastructure deploying [EspoCRM](https://www.espocrm.com/) on Google Cloud Platform. Provisions a single GCE instance running Docker Compose (EspoCRM app, daemon, websocket, Caddy reverse proxy) backed by Cloud SQL for MySQL 8.0, with Google Workspace OIDC authentication.
+
+Built by [JuntoAI](https://juntoai.org) — the next generation business network.
 
 Target workload: 5 users, fewer than 1,000 contacts, 6-month horizon.
 
@@ -380,3 +382,25 @@ After destroying, remember to remove the Route53 A record for `crm.example.com` 
 | `instance_name` | GCE instance name (for `gcloud compute ssh`) |
 | `instance_zone` | GCE instance zone (for `gcloud compute ssh`) |
 | `application_url` | `https://crm.example.com` |
+
+## Related Repositories
+
+This infrastructure provisions the platform for the [JuntoAI EspoCRM ecosystem](https://github.com/JuntoAI/espocrm-workspace). No dependencies — this repo is standalone.
+
+| Repository | Description | Dependency |
+|---|---|---|
+| [espocrm-chart-dashlet-extension](https://github.com/JuntoAI/espocrm-chart-dashlet-extension) | Pie and bar chart dashlets for the home dashboard | Runs on this infra |
+| [espocrm-reporting-extension](https://github.com/JuntoAI/espocrm-reporting-extension) | Full-page reporting dashboard with interactive charts | Runs on this infra |
+| [espocrm-ai-assistant-extension](https://github.com/JuntoAI/espocrm-ai-assistant-extension) | AI chat assistant for EspoCRM | Runs on this infra |
+| [espocrm-ai-backend](https://github.com/JuntoAI/espocrm-ai-backend) | AI backend service bridging Gemini and MCP tools | Runs on this infra |
+| [espocrm-mcp-server](https://github.com/JuntoAI/espocrm-mcp-server) | MCP server with 47 CRM tools | Runs on this infra |
+
+## About JuntoAI
+
+[JuntoAI](https://juntoai.org) is the next generation business network. We use EspoCRM as our CRM and share our infrastructure code with the community as open source.
+
+Join the waitlist at [juntoai.org](https://juntoai.org). Found a bug? [Open an issue](https://github.com/JuntoAI/espocrm-gcp-terraform/issues) or reach out at [juntoai.org](https://juntoai.org).
+
+## License
+
+MIT
