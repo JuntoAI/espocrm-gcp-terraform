@@ -69,14 +69,16 @@ services:
       GOOGLE_CLOUD_PROJECT: ${project_id}
       GOOGLE_CLOUD_REGION: ${region}
       GOOGLE_APPLICATION_CREDENTIALS: /app/credentials.json
-      GEMINI_DEFAULT_MODEL: gemini-3.1-flash-lite-preview
-      GEMINI_AVAILABLE_MODELS: gemini-3.1-pro-preview,gemini-3.1-flash-lite-preview
+      GEMINI_DEFAULT_MODEL: gemini-3.5-flash
+      GEMINI_AVAILABLE_MODELS: gemini-3.5-flash,gemini-3-flash-preview,gemini-3.1-pro-preview,gemini-3.1-flash-lite-preview
       SESSION_TIMEOUT_MS: "1800000"
       RATE_LIMIT_PER_MIN: "30"
       MAX_CONTEXT_MESSAGES: "20"
       LOG_LEVEL: info
+      USER_CONFIG_PATH: /data/user-configs
     volumes:
       - /tmp/ai-backend-uploads:/tmp/uploads
+      - /opt/espocrm/user-configs:/data/user-configs
       - ${gcp_credentials_path:-/opt/espocrm/gcp-credentials.json}:/app/credentials.json:ro
     healthcheck:
       test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3001/health"]
