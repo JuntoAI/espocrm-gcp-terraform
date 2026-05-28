@@ -76,9 +76,11 @@ services:
       MAX_CONTEXT_MESSAGES: "20"
       LOG_LEVEL: info
       USER_CONFIG_PATH: /data/user-configs
+      KNOWLEDGE_PATH: /data/knowledge
     volumes:
       - /tmp/ai-backend-uploads:/tmp/uploads
       - /opt/espocrm/user-configs:/data/user-configs
+      - /opt/espocrm/knowledge:/data/knowledge
       - ${gcp_credentials_path:-/opt/espocrm/gcp-credentials.json}:/app/credentials.json:ro
     healthcheck:
       test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3001/health"]
